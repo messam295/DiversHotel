@@ -1,0 +1,54 @@
+﻿@page
+@model DiversHotel.Pages.Reservations.IndexModel
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+@if (TempData["Message"] is not null)
+{
+    <div class="text-success">
+        @TempData["Message"]
+    </div>
+}
+
+<div class="my-5">
+    <a asp-page="Create" class="btn btn-primary btn-lg" tabindex="-1" role="button" aria-disabled="true">Make a reservation</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Country</th>
+            <th scope="col">No. of adults</th>
+            <th scope="col">No. of children</th>
+            <th scope="col">Check-in date</th>
+            <th scope="col">Check-out date</th>
+            <th scope="col">Room number</th>
+            <th scope="col">Meal plan</th>
+            <th scope="col">Total amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var reservation in Model.Reservations)
+        {
+            <tr>
+                <td>@reservation.Name</td>
+                <td>@reservation.Email</td>
+                <td>@reservation.Country</td>
+                <td>@reservation.NumberOfAdults</td>
+                <td>@reservation.NumberOfChildren</td>
+                <td>@reservation.CheckInDateUtc</td>
+                <td>@reservation.CheckOutDateUtc</td>
+                <td>@reservation.RoomNumber</td>
+                <td>@reservation.MealPlan</td>
+                <td>@reservation.TotalAmount</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,77 @@
+﻿@page
+@model DiversHotel.Pages.Reservations.CreateModel
+@{
+    ViewData["Title"] = "Make a reservation";
+}
+
+<div class="my-3 text-center">
+    <h1>Make a reservation</h1>
+</div>
+
+@if(TempData["Error"] is not null)
+{
+    <div class="text-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<form method="post">
+    <div class="row text-danger" asp-validation-summary="All"></div>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-4">
+            <label asp-for="ReservationDto.Name"></label>
+            <input asp-for="ReservationDto.Name" class="form-control" required/>
+            <span class="text-danger" asp-validation-for="ReservationDto.Name"></span>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+            <label asp-for="ReservationDto.Email"></label>
+            <input asp-for="ReservationDto.Email" class="form-control" required />
+            <span class="text-danger" asp-validation-for="ReservationDto.Email"></span>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+            <label asp-for="ReservationDto.Country"></label>
+            <input asp-for="ReservationDto.Country" class="form-control" required />
+            <span class="text-danger" asp-validation-for="ReservationDto.Country"></span>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-3">
+            <label asp-for="ReservationDto.NumberOfAdults">Number Of Adults</label>
+            <input asp-for="ReservationDto.NumberOfAdults" class="form-control" required />
+            <span class="text-danger" asp-validation-for="ReservationDto.NumberOfAdults"></span>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
+            <label asp-for="ReservationDto.NumberOfChildren">Number Of Children</label>
+            <input asp-for="ReservationDto.NumberOfChildren" class="form-control" required />
+            <span class="text-danger" asp-validation-for="ReservationDto.NumberOfChildren"></span>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
+            <label asp-for="ReservationDto.CheckInDateUtc">Check-In Date</label>
+            <input asp-for="ReservationDto.CheckInDateUtc" type="date" class="form-control" required />
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
+            <label asp-for="ReservationDto.CheckOutDateUtc">Check-Out Date</label>
+            <input asp-for="ReservationDto.CheckOutDateUtc" type="date" class="form-control" required />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <label asp-for="ReservationDto.RoomTypeId">Room Type</label>
+            @Html.DropDownListFor(model => model.ReservationDto.RoomTypeId, 
+            new SelectList(Model.RoomTypes, "Id","RoomTypeName"), "Select Room Type", new { Required = true , @class = "form-control" })
+            <span class="text-danger" asp-validation-for="ReservationDto.RoomTypeId"></span>
+        </div>
+        <div class="col-12 col-md-6">
+            <label asp-for="ReservationDto.MealPlanId">Meal Plan</label>
+            @Html.DropDownListFor(model => model.ReservationDto.MealPlanId,
+            new SelectList(Model.MealPlans, "Id", "Name"), "Select Meal Plan", new { Required = true , @class = "form-control" })
+            <span class="text-danger" asp-validation-for="ReservationDto.MealPlanId"></span>
+        </div>
+    </div>
+
+    <div class="my-2 text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
